@@ -1,0 +1,46 @@
+<div>
+    <form>
+        <div class="form-group">
+            <label class="control-label" for="focusedIniput">Post Name</label>
+            <input type="text" class="form-control" ng-model="post.name"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="focusedIniput">Post Description</label>
+            <input type="text" class="form-control" ng-model="post.description"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="focusedIniput">Post URL (no http:// needed)</label>
+            <input type="text" class="form-control" ng-model="post.url"/>
+        </div>
+        <button type="submit" class="btn btn-success btn-block" ng-click="savePost(post)">Save Post</button>
+    </form>
+</div>
+<div ng-repeat="post in posts">
+    <h2><a ng-href="{{post.url}}">{{post.name}}</a></h2>
+    <p>{{post.description}}</p>
+    <button ng-click="deletePost(post)" class="btn btn-danger">Delete Post</button>
+    <span>{{post.votes}}</span>
+    <button ng-click="addVote(post)" class="btn btn-primary">Add Vote</button>
+    <br>
+    <br>
+    <div class="panel panel-default" ng-repeat="comment in comments">
+        <div class="panel panel-body">
+            <a ng-href="https://twitter.com/{{comment.user}}">{{comment.user}}</a>
+        </div>
+        <div class="panel panel-footer"> {{comment.text}}
+            <br>
+            <button class="btn btn-danger" ng-click="deleteComment(post,comment)"> Delete Comment</button>
+        </div>
+    </div>
+    <form>
+        <div class="input-group">
+            <input type="text" ng-model="newComment.txt" class="form-control">
+            <div class="input-group-btn">
+                <button ng-click="addComments(post,newComment)" class="btn btn-success">Add Comment</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+<button ng-click="login()" class="btn btn-primary">Login with Twitter</button>
+<span>Currently logged in as: {{authData.twitter.username}}</span>
